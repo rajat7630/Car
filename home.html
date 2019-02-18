@@ -29,8 +29,14 @@
     let type=document.getElementById("car_type");
     let location=type.options[type.selectedIndex].text;
     let date=document.getElementById("date_pick").value;
+    let datenew= date.toString();
+    let dateParts = datenew.split("/");
+    let dateObject = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+    let dayname=days[dateObject.getDay()]; 
+    window.alert(dayname);
     let senddata={
-      "location":location
+      "location":location,
+      "day":dayname
     };
     window.sessionStorage.setItem("dataitem", JSON.stringify(senddata));
     console.log(location)

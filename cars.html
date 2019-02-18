@@ -37,6 +37,9 @@
   let filtertransmission=[];
   let filtercar=[];
   let filterfuel=[];
+  let dataobj=window.sessionStorage.getItem("dataitem");
+    let formdata=JSON.parse(dataobj);
+    console.log(formdata);
   window.onload=function run(){
     let x= document.getElementById("main-class");
   /**  let filters={
@@ -64,11 +67,14 @@
     let Suv= document.getElementById("suv");
     */
     let str="";
-    let dataobj=window.sessionStorage.getItem("dataitem");
-    let formdata=JSON.parse(dataobj);
-    console.log(formdata);
     data.map((car,index)=>{
-      if(car.Location!==formdata.location)
+      let Availaible=false;
+      let ttt=car.Availability.map((day,key)=>{
+        if(car.Availability[key]===formdata.day)
+        Availaible= true;
+      });
+      console.log(Availaible);
+      if(car.Location!==formdata.location || Availaible===false)
       {  
         str+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md '+"disabled"+'">Availaible</a></div></div>';
       }
@@ -97,9 +103,21 @@
       console.log(filtertransmission);
       let filtereddata="";
       data.map(car=>{
+        let Availaible=false;
+      let ttt=car.Availability.map((day,key)=>{
+        if(car.Availability[key]===formdata.day)
+        Availaible= true;
+      });
+      console.log(Availaible);
         if(filtertransmission[0]===car.Transmission||filtertransmission[1]===car.Transmission)
         {
-          filtereddata+=' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md">Availaible</a></div></div>';
+          if(car.Location!==formdata.location|| Availaible===false)
+      {  
+        filtereddata+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md '+"disabled"+'">Availaible</a></div></div>';
+      }
+      else
+        filtereddata+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md" >Availaible</a></div></div>';
+        
         }
       })
       x.innerHTML=filtereddata;
@@ -107,7 +125,19 @@
     {
       let strnew="";
       data.map((car,index)=>{
-    strnew+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md">Availaible</a></div></div>';
+        let Availaible=false;
+      let ttt=car.Availability.map((day,key)=>{
+        if(car.Availability[key]===formdata.day)
+        Availaible= true;
+      });
+      console.log(Availaible);
+        if(car.Location!==formdata.location|| Availaible===false)
+      {  
+        strnew+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md '+"disabled"+'">Availaible</a></div></div>';
+      }
+      else
+        strnew+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md" >Availaible</a></div></div>';
+        
     });
     x.innerHTML=strnew;
     }
@@ -130,9 +160,21 @@
       console.log(filtercar);
       let filtereddata="";
       data.map(car=>{
+        let Availaible=false;
+      let ttt=car.Availability.map((day,key)=>{
+        if(car.Availability[key]===formdata.day)
+        Availaible= true;
+      });
+      console.log(Availaible);
         if(filtercar[0]===car.Car_Type ||filtercar[1]===car.Car_Type ||filtercar[2]===car.Car_Type ||filtercar[3]===car.Car_Type )
         {
-          filtereddata+=' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md">Availaible</a></div></div>';
+          if(car.Location!==formdata.location|| Availaible===false)
+      {  
+        filtereddata+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md '+"disabled"+'">Availaible</a></div></div>';
+      }
+      else
+        filtereddata+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md" >Availaible</a></div></div>';
+        
         }
       })
       x.innerHTML=filtereddata;
@@ -140,8 +182,19 @@
     {
       let strnew="";
       data.map((car,index)=>{
-    strnew+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md">Availaible</a></div></div>';
-    });
+        let Availaible=false;
+      let ttt=car.Availability.map((day,key)=>{
+        if(car.Availability[key]===formdata.day)
+        Availaible= true;
+      });
+      console.log(Availaible);
+        if(car.Location!==formdata.location|| Availaible===false)
+      {  
+        strnew+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md '+"disabled"+'">Availaible</a></div></div>';
+      }
+      else
+        strnew+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md" >Availaible</a></div></div>';
+            });
     x.innerHTML=strnew;
     }
     }
@@ -163,18 +216,41 @@
       console.log(filterfuel);
       let filtereddata="";
       data.map(car=>{
+        let Availaible=false;
+      let ttt=car.Availability.map((day,key)=>{
+        if(car.Availability[key]===formdata.day)
+        Availaible= true;
+      });
+      console.log(Availaible);
         if(filterfuel[0]===car.Fuel_Type ||filterfuel[1]===car.Fuel_Type  )
         {
-          filtereddata+=' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md">Availaible</a></div></div>';
-        }
+          if(car.Location!==formdata.location|| Availaible===false)
+      {  
+        filtereddata+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md '+"disabled"+'">Availaible</a></div></div>';
+      }
+      else
+        filtereddata+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md" >Availaible</a></div></div>';
+        
+          }
       })
       x.innerHTML=filtereddata;
       if(filtercar.length==0&&filtertransmission.length==0&&filterfuel.length==0)
     {
       let strnew="";
       data.map((car,index)=>{
-    strnew+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md">Availaible</a></div></div>';
-    });
+        let Availaible=false;
+      let ttt=car.Availability.map((day,key)=>{
+        if(car.Availability[key]===formdata.day)
+        Availaible= true;
+      });
+      console.log(Availaible);
+        if(car.Location!==formdata.location|| Availaible===false)
+      {  
+        strnew+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md '+"disabled"+'">Availaible</a></div></div>';
+      }
+      else
+        strnew+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md" >Availaible</a></div></div>';
+            });
     x.innerHTML=strnew;
     }
     }
