@@ -8,6 +8,9 @@ body {
 	font-weight: 400;
 	overflow-x: hidden;
 }
+.disabled{
+	background: grey;
+}
 /*---------------------------------------
    Typorgraphy
 -----------------------------------------*/

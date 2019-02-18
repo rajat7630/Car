@@ -22,7 +22,21 @@
 <!-- Owl Carousel css -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+<script>
+  function submithandler()
+  {
+    let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let type=document.getElementById("car_type");
+    let location=type.options[type.selectedIndex].text;
+    let date=document.getElementById("date_pick").value;
+    let senddata={
+      "location":location
+    };
+    window.sessionStorage.setItem("dataitem", JSON.stringify(senddata));
+    console.log(location)
+  };  
 
+</script>
 <!-- Main css -->
 <link rel="stylesheet" href="style.css">
 </head>
@@ -78,45 +92,28 @@
     </div>
   </div>
 </div>
-<script>
-  window.onload=function loading(){
-    
-  }
-  function submithandler()
-    {
-      let location=document.fornms["formmain"]["car_type"].value;
-    let date=document.fornms["formmain"]["datetime_pick"].value;
-    let dataobj={
-      "location":location,
-      "datetime":date
-    }
-    console.log(dataobj);
-    let da=JSON.stringify(dataobj);
-    window.sessionStorage.setItem("dataitem",da);
-    }
-</script>
 <!-- Form Section -->
 <div class="container">
   <div class="bformBox">
     <h3>BOOK YOUR CAR TODAY!</h3>
-    <form name="formmain" method="POST" action="./cars.html"> 
+    <form method="POST" action="./cars.html"> 
       <div class="formrow">
-        <select class="form-control" name="car_type" >
-          <option value="" >Select Your Location</option>
+        <select class="form-control" id="car_type" >
+          <option>Select Your Location</option>
           <option>Koramangala</option>
           <option>HSR Layout</option>
           <option>Indiranagar</option>
         </select>
       </div>
           <div class="formrow">
-            <div class="input-group date form_datetime" data-date="2018-02-22T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-              <input class="form-control" size="16" type="text" value="" readonly placeholder="Select Date and Time" name="datetime_pick" required >
-              </span> <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span> </div>
+            <div class="input-group date form_datetime" data-date="2018-02-22T05:25:07Z" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+              <input class="form-control" size="16" type="text" readonly placeholder="Select Date" id="date_pick" required >
+               <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span> </div>
           </div>
         </div>
 
      <div class="formbtn">
-        <button class="btn" onclick="submithandler">Submit Car Booking</button>
+        <button class="btn" onclick="submithandler()">Submit Car Booking</button>
       </div>
     </form>
   </div>

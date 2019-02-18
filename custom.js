@@ -7,7 +7,9 @@
 
 	/*==== Date Picker ====*/
 	$('.form_datetime').datetimepicker({
-        weekStart: 1,
+		format:"dd/mm/yyyy",
+		weekStart: 1,
+		pickTime:false,
         todayBtn:  1,
 		autoclose: 1,
 		todayHighlight: 1,

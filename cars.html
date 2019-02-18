@@ -64,14 +64,20 @@
     let Suv= document.getElementById("suv");
     */
     let str="";
+    let dataobj=window.sessionStorage.getItem("dataitem");
+    let formdata=JSON.parse(dataobj);
+    console.log(formdata);
     data.map((car,index)=>{
-    str+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md">Availaible</a></div></div>';
-    console.log(car);
+      if(car.Location!==formdata.location)
+      {  
+        str+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md '+"disabled"+'">Availaible</a></div></div>';
+      }
+      else
+        str+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md" >Availaible</a></div></div>';
+        console.log(car);
   });
   x.innerHTML=str;
-  let dataobj=window.sessionStorage.getItem("dataitem");
-  let formdata=JSON.parse(dataobj);
-  console.log(formdata);
+  
   }
   function changehandler(fill)
     {
@@ -91,7 +97,7 @@
       console.log(filtertransmission);
       let filtereddata="";
       data.map(car=>{
-        if(filtertransmission[0]===car.Transmission)
+        if(filtertransmission[0]===car.Transmission||filtertransmission[1]===car.Transmission)
         {
           filtereddata+=' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md">Availaible</a></div></div>';
         }
@@ -171,15 +177,6 @@
     });
     x.innerHTML=strnew;
     }
-    }
-    if(filtercar.length==0&&filtertransmission.length==0&&filterfuel.length==0)
-    {
-      let strnew="";
-      data.map((car,index)=>{
-    strnew+= ' <div class="row car"> <div class="col-lg-5"><div class="view overlay rounded z-depth-2 mb-lg-0 mb-4"><img class="img-fluid" src="'+car.Photo+'" alt="Sample image"><a><div class="mask rgba-white-slight"></div></a></div></div><div class="col-lg-7 "><h3 class="font-weight-bold mb-3" ><strong>'+car.Name+'</strong></h3><p><strong>Price</strong>:<span >'+car.Price+'</span></p><p><strong>Seats</strong>:<span >'+car.Seats.toString()+'</span></p><p><strong>Fuel Type</strong>:<span >'+car.Fuel_Type+'</span></p><p><strong>Transmission</strong>:<span >'+car.Transmission+'</span></p><p><strong>Car Type</strong>:<span >'+car.Car_Type+'</span></p><a class="btn btn-success btn-md">Availaible</a></div></div>';
-    });
-    let x= document.getElementById("main-class");
-    x.innerHTML=strnew;
     }
 </script>
 
